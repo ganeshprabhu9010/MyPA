@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="../css/index.css">
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
+            <!--- NEWLY ADDED/MODIFIED  --->
+        <title>My PA</title>
+        <link rel="stylesheet" href="../css/vendor/jquery.mobile-1.5.0-alpha.1.min.css" />
+        <script src="../js/vendor/jquery-3.2.1.min.js"></script>
+        <script src="../js/vendor/jquery.mobile-1.5.0-alpha.1.min.js"></script>
+        
+        <script>
+
+        </script>
+    </head>
+    <body id="body">
+
+
+
+    <div data-role="page" id="homePage">
+<!--            <div data-role="header"></div>-->
+<!--            <div class="head">-->
+<!--                <input id="eMenu" type="button" value="Menu">-->
+<!--            </div>-->
+        <div data-role="content" id="">
+            <img src="../resources/relax.png" class="noTaskImg"/>
+            <div class="eventProgressContainer">
+                <img src="../resources/water.png" style="z-index: 99;opacity: 0.2" class="eventProgressImage">
+                <img src="../resources/water.png" class="eventProgressImage" style=""/>
+                    <div class="eventProgressHide"></div>
+            </div>
+            <div class="currentTask">
+                
+            </div>
+        </div>
+    </div>
+
+
+<div data-role="page" id="eventListPage"></div>
+<div data-role="page" id="createEventPage"></div>
+<div data-role="page" id="addCredentialPage"></div>
+<div data-role="page" id="cerdentialsListPage"></div>
+
+
+
+<div id="menu-panel" data-enhance="false" class="hide">
+    <div class="menuHead">Menu<input id="closeMenu" type="image" src="../resources/leftArr.png" alt="Close" /></div>
+    <div class="menuHead" id="loadHome">Home</div>
+    <div class="menuHead">Event Organizer</div>
+    <div class="menuItem" id="loadCreateEvent"><a href="#" >Create Event</a></div>
+    <div class="menuItem"  id="loadEventListPage"><a href="#">Events</a></div>
+    <div class="menuHead">Credential Vault</div>
+    <div class="menuItem"  id="AddCredentials"><a href="#">Add</a></div>
+    <div class="menuItem"  id="loadCredentialList"><a href="#">Credentials</a></div>
+    <div class="menuItem"  id="loadChangePIN"><a href="#">Change PIN</a></div>
+    
+</div>
+
+
+        <div id="scratch" style="display: block;">
+            <div class="common-header" data-role="header" data-position="fixed">
+                <div class="head">
+                    <input id="eMenu" type="image" src="../resources/menu.png" alt="Menu">
+                    <span> My PA</span>
+                    <div id="addCredentialMenu"></div>
+                </div>
+            </div>
+<!--            <div class="common-footer" data-role="footer" data-position="fixed">-->
+<!--                <div data-role="navbar">-->
+<!--                    <ul>-->
+<!--                        <li><a href="#page-1">Page 1</a></li>-->
+<!--                        <li><a href="#page-2">Page 2</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
+    <div data-role="dialog" id="appAuthentication">
+        <div data-role="header">
+            <h2 id="pinHeader">Enter pin</h2>
+        </div>
+        <div role="main" class="ui-content">
+            <input type="password" maxlength="4" id="appPin">
+        </div>
+    </div>
+    
+        <script type="text/javascript" src="../cordova.js"></script>
+        <script type="text/javascript" src="../js/controllers/constants.js"></script>
+        <script type="text/javascript" src="../js/controllers/calendarController.js"></script>
+        <script type="text/javascript" src="../js/controllers/index.js"></script>
+        <script type="text/javascript" src="../js/controllers/menu.js"></script>
+        <script type="text/javascript" src="../js/controllers/homeController.js"></script>
+        <script type="text/javascript" src="../js/controllers/eventListController.js"></script>
+        <script type="text/javascript" src="../js/controllers/createEventController.js"></script>
+        <script type="text/javascript" src="../js/controllers/addCredentials.js"></script>
+        <script type="text/javascript" src="../js/controllers/credentialsList.js"></script>
+        <script type="text/javascript" src="../js/controllers/appAuthentication.js"></script>
+    <script type="text/javascript" src="../js/controllers/encrypt.js"></script>
+    </body>
+</html>

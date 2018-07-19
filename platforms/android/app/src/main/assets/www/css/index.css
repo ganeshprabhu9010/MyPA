@@ -1,0 +1,658 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    background-attachment:fixed;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+/*    text-transform:uppercase;*/
+    width:100%;
+}
+
+/* Portrait layout (default) */
+.app {
+    background:url(../resources/img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+}
+
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+
+/*My Calendar Events*/
+.eventItem {
+    height: 90px;
+    background-color: lightgrey;
+    background-image: url(../resources/ver_cal_line.png);
+    background-size: 3px 100%;
+    background-repeat: no-repeat;
+    background-position-x: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-family: helvetica;
+    text-transform: lowercase;
+    font-size: 14pt;
+}
+
+.eventTime {
+    width: calc(25% - 5px);
+    height: 100%;
+    float: left;
+    text-align: right;
+    margin-left: 5px;
+    font-size: 13.5pt;
+    font-weight: 900;
+}
+
+.eventDesc {
+    width: calc(75% - 5px);
+    height: 100%;
+    float: left;
+    margin-left: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*.eventNote {*/
+/*    width: calc(20% - 5px);*/
+/*    height: 100%;*/
+/*    float: left;*/
+/*    margin-left: 5px;*/
+/*    text-overflow: ellipsis;*/
+/*    overflow: hidden;*/
+/*}*/
+
+.calPoint {
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 3.5px;
+    margin-top: 3px;
+}
+
+#eventPageContent{
+    background-image: url(../resources/ver_cal_line.png);
+    background-size: 3px 100%;
+    background-repeat: no-repeat;
+    background-position-x: 15px;
+}
+
+
+.eventCeationTitle {
+    text-transform: capitalize ;
+    font-family: Copperplate;
+    font-size: 13pt;
+    font-weight: 2000;
+}
+
+.myPalbl {
+    height: 8px;
+    font-size: 12px;
+    text-transform: capitalize ;
+    font-weight: bolder;
+    color: darkolivegreen;
+}
+.myPaInfoLabel {
+    color: black;
+    text-shadow: none;
+    font-weight: 500;
+    padding: 5px;
+}
+/*My Calendar Events - END*/
+
+
+
+/* MENU:START */
+#menu-panel{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    background-color:#b96c26;
+    top: 0;
+    left: 0;
+}
+.menuOpen{
+    width:40% !important;
+    -webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+}
+
+
+.menuItem {
+    border-bottom: 1px solid DARKGREY;
+    text-shadow: none;
+    height: 25px;
+    padding-top: 5px;
+    padding-left: 15px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    background-size: 20px 20px;
+    background-position: right;
+    padding-right: 24px;
+    background-position-x: 97%;
+}
+.menuHead {
+    border-bottom: 1px solid DARKGREY;
+    text-shadow: none;
+    height: 25px;
+    padding-top: 5px;
+    padding-left: 3px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.menuItem a {
+    font-style: normal;
+    text-decoration: none;
+    color: rgba(34, 34, 34, 0.87);
+    font-weight: 500;
+}
+
+#eMenu {
+    position: relative;
+    width: 20px;
+    height: 15px;
+    border-radius: 0px;
+    margin: 5px;
+    left: 0px;
+    top: 0px;
+    float: left;
+}
+
+#closeMenu {
+    height: 20px;
+    float: right;
+    margin-right: 4px;
+}
+
+.head {
+
+    height: 2em;
+    padding-bottom: 10px;
+    color: white;
+    text-decoration: none;
+    text-shadow: none;
+    background-color: rgba(255, 150, 42, 0.87);;
+    z-index: 999;
+    padding: 2px !important;
+    font-weight: bolder;
+    text-align: center;
+
+}
+#addCredentialMenu {
+
+    height: 25px;
+    width: 25px;
+    float: right;
+}
+
+/*.menuItem:after {*/
+/*    content: "";*/
+/*    width: 30px;*/
+/*    height: 30px;*/
+/*    background-image: url("../resources/rightArrow.png");*/
+/*    top: 10px;*/
+/*    right: 5px;*/
+/*    position: absolute;*/
+/*    display: inline-block;*/
+/*}*/
+/* MENU:END */
+
+
+.ui-page {
+    margin-top: 30px !important;
+/*    background-color: white;*/
+}
+
+
+/*  Event List Page: Start*/
+.cCopyName {
+    width: 15px;
+    border-radius: 0px;
+    margin: 6px 9px 0px 5px;
+    float: right;
+}
+
+.cCopyPwd {
+    width: 15px;
+    border-radius: 0px;
+    float: right;
+    margin: 5px;
+}
+
+.delCred {
+     width: 20px;
+    border-radius: 0px;
+    float: right;
+    margin: 4px;
+    vertical-align: middle;
+}
+
+.credListItem {
+    height: 30px;
+    background-color: rgb(237, 237, 237);
+    border-bottom: darkgray solid;
+    text-shadow: none;
+    padding: 0px !important;
+}
+
+.accContainer {
+    width: 20%;
+    float: left;
+    font-size: 12px;
+    font-weight: 400;
+    height: 100%;
+    vertical-align: middle;
+    padding-top: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.usrNameContainer {
+    width: calc(58% - 65px);
+    float: left;
+    font-size: 12px;
+    font-weight: 400;
+    height: 100%;
+    vertical-align: middle;
+    /* padding-top: 3px; */
+    padding-bottom: 3px;
+}
+.pwdContainer {
+    width: 31%;
+    float: left;
+    font-size: 12px;
+    font-weight: 400;
+    height: 100%;
+    vertical-align: middle;
+    /* padding-top: 3px; */
+    padding-bottom: 3px;
+}
+.toolsContainer {
+    width: 40px;
+    float: left;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 4px;
+}
+
+.credLabels {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    width: calc(100% - 35px);
+    /* height: calc(100% - 15px); */
+    margin: 0px;
+    background-color: rgba(133, 141, 147, 0.13);
+    float: left;
+    border-radius: 5px;
+    /* border: 1px solid darkgrey; */
+    padding-left: 4px;
+    padding-right: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    height: 85%;
+    padding-top: 5px;
+    /* background-color: green; */
+}
+/*  Event List Page: End*/
+
+
+/*Geetha*/
+#menuAccessibilityBtn{
+    position: relative;
+    width:  20px;
+    border-radius: 0px;
+    max-height:25px;
+    vertical-align: middle ;
+}
+.myPaTextbox {
+width: 93%;
+    margin-left: 3%;
+    margin-top: 3%;
+    margin-right: 3%;
+}
+#credentialAdddiv {
+    width:100%;
+    margin-top:10%;
+}
+.myPaBtn {
+    margin-left: 35%;
+    width: 30%;
+}
+.credentialLbl{
+    margin-top: 5%;
+    margin-left: 3%;
+}
+
+
+#createEvent table {
+    width: 100%;
+}
+
+
+
+/* HOME SCREEN START */
+
+.eventProgressHide{
+    width: 100%;
+    height: 15%;
+    float: left;
+    background-color: rgba(248, 248, 248, 0.65);
+    top: 0px;
+    position: relative;
+}
+
+.eventProgressImage {
+    width: 50%;
+    height: auto;
+    position: absolute;
+    margin-left: 25%;
+    z-index: 0;
+}
+.eventProgressContainer {
+    background-color: transparent;
+    width: 100%;
+    height: 170px;
+    float: left;
+    margin: 5px;
+    display:none;
+}
+
+.noTaskImg{
+    width: 40%;
+    display: block;
+    margin-left: 30%;
+    margin-top: 10%;
+}
+/* HOME SCREEN END */
+
+.currentTask {
+    position: absolute;
+    bottom: 300px;
+    top: 200px;
+    left: 0px;
+    width: 100%;
+    display:none;
+}
+
+/*****************tooltip:Start********************/
+.UNTooltip {
+
+    left: 10px;
+
+}
+.pwdTooltip {
+
+    right: 15px;
+
+}
+/*.tooltip:after*/
+/*{*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    bottom: -25px;*/
+/*    left: 175px;*/
+/*    border-style: solid;*/
+/*    border-width: 25px 25px 0;*/
+/*    border-color: #FFFFFF transparent;*/
+/*    display: block;*/
+/*    width: 0;*/
+/*    z-index: 1;*/
+/*}*/
+.tooltip {
+    position: absolute;
+    background-color: rgba(235, 209, 132, 0.93);
+    z-index: 999;
+    margin-top: 35px;
+    min-width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    max-width: 90%;
+    
+    line-height: 20px;
+    border: 1px solid rgb(225, 137, 5);
+}
+.tooltip:before
+{
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 40px;
+    border-style: solid;
+    border-width: 0px 8px 8px;
+    border-color: rgb(225, 137, 5) transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+}
+
+/*.tooltip {*/
+/*    position: relative;*/
+/*    display: inline-block;*/
+/*    width: 80%;*/
+/*    height: 100%;*/
+/*}*/
+
+
+/*.tooltip .tooltiptext {*/
+/*    visibility: hidden;*/
+/*    min-width:60%;*/
+/*    background-color: #555;*/
+/*    color: #fff;*/
+/*    text-align: center;*/
+/*    border-radius: 6px;*/
+/*    padding: 5px 0;*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*    bottom: -95%;*/
+/*    left: 40%;*/
+/*    margin-left: -60px;*/
+/*    opacity: 0;*/
+/*    transition: opacity 0.3s;*/
+/*    padding-left: 5px;*/
+/*    padding-right: 5px;*/
+/*}*/
+/**/
+/**/
+/*.tooltip .tooltiptext::after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: -40%;*/
+/*    left: 70%;*/
+/*    margin-left: -55%;*/
+/*    border-width: 5px;*/
+/*    border-style: solid;*/
+/*    border-color: transparent transparent #555 transparent;*/
+/*}*/
+/**/
+/**/
+/*.tooltip:hover .tooltiptext {*/
+/*    visibility: visible;*/
+/*    opacity: 1;*/
+/*}*/
+/*****************tooltip:End********************/
+
+
+/*
+ 
+ FOR TOOL TIP ARROW
+ .bubble
+ {
+ position: absolute;
+ background-color: rgba(235, 209, 132, 0.93);
+ z-index: 999;
+ margin-top: 35px;
+ left: 10px;
+ min-width: 100px;
+ text-align: center;
+ border-radius: 3px;
+ max-width: 100%;
+ 
+ line-height: 20px;
+ border: 1px solid rgb(225, 137, 5);
+ }
+ 
+ .bubble:after
+ {
+ content: "";
+ position: absolute;
+ bottom: -25px;
+ left: 175px;
+ border-style: solid;
+ border-width: 25px 25px 0;
+ border-color: #FFFFFF transparent;
+ display: block;
+ width: 0;
+ z-index: 1;
+ }
+ 
+ .bubble:before
+ {
+ content: "";
+ position: absolute;
+ top: -8px;
+ left: 40px;
+ border-style: solid;
+ border-width: 0px 8px 8px;
+ border-color: rgb(225, 137, 5) transparent;
+ display: block;
+ width: 0;
+ z-index: 0;
+ }
+ 
+ */
+
+
+/* App Pin: Start*/
+#appAuthentication>.ui-page-dialog-contain {
+    width: 92.5%;
+    max-width: 500px;
+    margin: 10% auto 1em;
+    padding: 0;
+    position: relative;
+    top: -1em;
+    box-shadow: 5px 4px 2px #b56e00;
+    /* vertical-align: middle; */
+    margin-top: calc(100% - 175px);
+    height: 175px;
+    text-align: center;
+}
+
+#appPin {
+    text-align: center;
+    font-size: 25px;
+}
+
+/* App Pin: End*/
