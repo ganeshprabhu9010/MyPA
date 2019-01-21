@@ -27,6 +27,9 @@
     },
     "cordova-plugin-background-mode": {
       "PACKAGE_NAME": "com.gp.mypa"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.gp.mypa"
     }
   },
   "dependent_plugins": {

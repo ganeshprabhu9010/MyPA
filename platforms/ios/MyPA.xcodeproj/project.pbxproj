@@ -35,6 +35,9 @@
 		AB51EE34D9B048F4A66546D6 /* APPBackgroundMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAFA7DB3EE0491386CC1AF1 /* APPBackgroundMode.m */; };
 		D7CCCE7553E44E098ED9FEE4 /* APPMethodMagic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1768932A8AD04D53AC48A98A /* APPMethodMagic.m */; };
 		677B2576F5EE4A8A92150B1B /* appbeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D18E8D84BC240A399298A21 /* appbeep.wav */; };
+		59355D85E13A4D7BA3A67E0A /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C86DFB5A6F94C6992C61E0D /* CDVFile.m */; };
+		293255F51726498293DE82B8 /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B069102304A439B35FFF3 /* CDVLocalFilesystem.m */; };
+		F1D67934CE074FB5B436D2B2 /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DFB50C366C443F946F0C0E /* CDVAssetLibraryFilesystem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +121,12 @@
 		19393CDE09124176A4374D00 /* APPBackgroundMode.h */ = {isa = PBXFileReference; name = "APPBackgroundMode.h"; path = "cordova-plugin-background-mode/APPBackgroundMode.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		9641E6D3118E498CBFCD3A75 /* APPMethodMagic.h */ = {isa = PBXFileReference; name = "APPMethodMagic.h"; path = "cordova-plugin-background-mode/APPMethodMagic.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		7D18E8D84BC240A399298A21 /* appbeep.wav */ = {isa = PBXFileReference; name = "appbeep.wav"; path = "appbeep.wav"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1C86DFB5A6F94C6992C61E0D /* CDVFile.m */ = {isa = PBXFileReference; name = "CDVFile.m"; path = "cordova-plugin-file/CDVFile.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		8C3B069102304A439B35FFF3 /* CDVLocalFilesystem.m */ = {isa = PBXFileReference; name = "CDVLocalFilesystem.m"; path = "cordova-plugin-file/CDVLocalFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		44DFB50C366C443F946F0C0E /* CDVAssetLibraryFilesystem.m */ = {isa = PBXFileReference; name = "CDVAssetLibraryFilesystem.m"; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		823666701B43466CBAD68EC8 /* CDVFile.h */ = {isa = PBXFileReference; name = "CDVFile.h"; path = "cordova-plugin-file/CDVFile.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		01FA316DFAA6486B922BB64B /* CDVLocalFilesystem.h */ = {isa = PBXFileReference; name = "CDVLocalFilesystem.h"; path = "cordova-plugin-file/CDVLocalFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		B42A35475CE24CFABB2182C9 /* CDVAssetLibraryFilesystem.h */ = {isa = PBXFileReference; name = "CDVAssetLibraryFilesystem.h"; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +274,12 @@
 				1768932A8AD04D53AC48A98A /* APPMethodMagic.m */,
 				19393CDE09124176A4374D00 /* APPBackgroundMode.h */,
 				9641E6D3118E498CBFCD3A75 /* APPMethodMagic.h */,
+				1C86DFB5A6F94C6992C61E0D /* CDVFile.m */,
+				8C3B069102304A439B35FFF3 /* CDVLocalFilesystem.m */,
+				44DFB50C366C443F946F0C0E /* CDVAssetLibraryFilesystem.m */,
+				823666701B43466CBAD68EC8 /* CDVFile.h */,
+				01FA316DFAA6486B922BB64B /* CDVLocalFilesystem.h */,
+				B42A35475CE24CFABB2182C9 /* CDVAssetLibraryFilesystem.h */,
 			);
 			name = Plugins;
 			path = MyPA/Plugins;
@@ -407,6 +422,9 @@
 				E15E36772E8C4AC1BD6A12EB /* CDVClipboard.m in Sources */,
 				AB51EE34D9B048F4A66546D6 /* APPBackgroundMode.m in Sources */,
 				D7CCCE7553E44E098ED9FEE4 /* APPMethodMagic.m in Sources */,
+				59355D85E13A4D7BA3A67E0A /* CDVFile.m in Sources */,
+				293255F51726498293DE82B8 /* CDVLocalFilesystem.m in Sources */,
+				F1D67934CE074FB5B436D2B2 /* CDVAssetLibraryFilesystem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
